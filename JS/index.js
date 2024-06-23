@@ -2,10 +2,10 @@ var form = document.querySelector("form");
 var nameInput = document.querySelector("#name");
 var email = document.querySelector("#email");
 var password = document.querySelector("#password");
-var btn = document.querySelector("button"); 
+var btn = document.querySelector("#sign-up"); 
 var message =document.querySelector("#message"); 
 var allInputs = document.querySelectorAll("input"); 
-var loginButton = document.querySelectorAll("#login-btn")
+var loginButton = document.querySelector("#login-btn");
 
 var accounts; 
 if(localStorage.getItem("accounts")==null){
@@ -55,14 +55,8 @@ btn.addEventListener("click" , function(){
 
 
     else if (nameInput.classList.contains("is-valid") && email.classList.contains("is-valid") && password.classList.contains("is-valid") && localStorage.getItem("accounts")!=null){
-    var existanceOfAccount ="";
-        for(var i =0 ; i<accounts.length ; i++){
-            if(accounts[i].email == email.value ){
-               existanceOfAccount=true ; 
-        break;
-            }
-        }
-        if(existanceOfAccount){
+   
+        if(existanceOfAccount()){
             message.classList.replace("d-none" , "d-block");
             message.innerHTML = "Email already exist";
             message.classList.add("text-danger");
@@ -131,10 +125,29 @@ console.log("valid")
    })(i);
 }
 
+function existanceOfAccount(){
+    var existanceOfAccount ="";
+    var Account=[] ; 
+    for(var i =0 ; i<accounts.length ; i++){
+        if(accounts[i].email == email.value ){
+           existanceOfAccount=true ; 
+           object.push({email:email.value , password : password.value}); 
+    break;
+        }
+    }
+    return  Account; 
+}
 
 
-loginButton.addEventListener("click" , function(){
-    
+loginButton.addEventListener("click" , function(e){
+    if(localStorage.getItem("accounts")==null){
+        message.innerHTML="You are new user Please Sign up" ; 
+    }
+    else{
+        if(existanceOfAccount().password ===e.target.password  ){
+message.innerHTML="welcome";
+        }
+    }
 })
 
 
