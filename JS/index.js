@@ -5,7 +5,7 @@ var password = document.querySelector("#password");
 var btn = document.querySelector("button"); 
 var message =document.querySelector("#message"); 
 var allInputs = document.querySelectorAll("input"); 
-
+var loginButton = document.querySelectorAll("#login-btn")
 
 var accounts; 
 if(localStorage.getItem("accounts")==null){
@@ -130,6 +130,12 @@ console.log("valid")
     })
    })(i);
 }
+
+
+
+loginButton.addEventListener("click" , function(){
+    
+})
 
 
 
