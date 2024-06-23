@@ -1,4 +1,18 @@
 var user = JSON.parse(localStorage.getItem("User"));
-console.log(user);
+var loginBtn = document.getElementById("logout");
+
 header = document.querySelector("h1");
-header.innerHTML = "👋 welcome, "+user[0].name;
+if(user==null){
+    window.location.href="../loginPage.html"; 
+
+}
+else{
+    header.innerHTML = "👋 welcome, "+user[0].name;
+}
+
+loginBtn.addEventListener("click" , function(){
+    localStorage.removeItem("User");
+    window.location.href="../loginPage.html"; 
+
+
+})
