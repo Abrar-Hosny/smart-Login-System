@@ -15,10 +15,23 @@ btn.addEventListener("click" ,function(){
 if(emailInput.value!="" && passwordInput.value!=""){
     if(localStorage.getItem("accounts") == null){
         accountsExsist =[] ; 
+        message.innerHTML = "You are new User please sign up";
+
     }
     else{
         accountsExsist=JSON.parse(localStorage.getItem("accounts"));
-        console.log(accountsExsist);
+        for(var i =0 ; i<accountsExsist.length ; i++){
+            if(accountsExsist[i].email == email.value && accountsExsist[i].password == passwordInput.value  ){
+                message.innerHTML = "welcome";
+                localStorage.setItem("User" , JSON.stringify(accountsExsist));
+                window.location.href=""
+                break;
+            }
+            else{
+                message.innerHTML = "incorrect email or password";
+
+            }
+        }
     }
 }
 else{
