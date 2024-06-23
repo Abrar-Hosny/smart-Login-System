@@ -24,7 +24,7 @@ if(emailInput.value!="" && passwordInput.value!=""){
             if(accountsExsist[i].email == email.value && accountsExsist[i].password == passwordInput.value  ){
                 message.innerHTML = "welcome";
                 localStorage.setItem("User" , JSON.stringify(accountsExsist));
-                window.location.href=""
+                window.location.href="../homePage.html"; 
                 break;
             }
             else{
