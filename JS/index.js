@@ -7,31 +7,91 @@ var message =document.querySelector("#message");
 var allInputs = document.querySelectorAll("input"); 
 
 
+var accounts; 
+if(localStorage.getItem("accounts")==null){
+    accounts =[]; 
+}
+else{
+  
+   accounts =  JSON.parse(localStorage.getItem("accounts"));
+    
+}
+
 
 form.addEventListener("submit" , function(e){
     e.preventDefault(); 
 
 })
 
+function addAccount(){
+    accounts.push({
+        name:nameInput.value , 
+        password : password.value , 
+        email:email.value
+    });
+    localStorage.setItem("accounts" , JSON.stringify(accounts));
+
+}
+
+
 
 
 btn.addEventListener("click" , function(){
    if(email.value != "" && nameInput.value!="" && password!=""){
-    console.log(email.value , nameInput.value , password.value);
+    if(nameInput.classList.contains("is-valid") && email.classList.contains("is-valid") && password.classList.contains("is-valid") && localStorage.getItem("accounts")==null){
+       addAccount(); 
 
-    message.classList.replace("d-none" , "d-block");
-    message.innerHTML = "success";
-    message.classList.remove("text-danger");
-    message.classList.add("text-success");
-    
-    var emailValue = email.value ; 
-    var passwordValue = password.value ; 
-    
-    // if(email.classList.contains("is-valid") && password.classList.contains("is-valid")){
+        console.log(email.value , nameInput.value , password.value);
+
+        message.classList.replace("d-none" , "d-block");
+        message.innerHTML = "success";
+        message.classList.remove("text-danger");
+        message.classList.add("text-success");
         
-        
-    //         }
-   }
+     
+      
+
+    }
+
+
+    else if (nameInput.classList.contains("is-valid") && email.classList.contains("is-valid") && password.classList.contains("is-valid") && localStorage.getItem("accounts")!=null){
+    var existanceOfAccount ="";
+        for(var i =0 ; i<accounts.length ; i++){
+            if(accounts[i].email == email.value ){
+               existanceOfAccount=true ; 
+        break;
+            }
+        }
+        if(existanceOfAccount){
+            message.classList.replace("d-none" , "d-block");
+            message.innerHTML = "Email already exist";
+            message.classList.add("text-danger");
+            message.classList.remove("text-success");
+        }
+        else{
+           addAccount();
+            message.classList.replace("d-none" , "d-block");
+            message.innerHTML = "success";
+            message.classList.remove("text-danger");
+            message.classList.add("text-success");
+        }
+    }
+    else if (!nameInput.classList.contains("is-valid") || !email.classList.contains("is-invalid") || !password.classList.contains("is-invalid") ){
+    
+        message.classList.replace("d-none" , "d-block");
+        message.innerHTML = "Please try again check name min 3 characters and password min 6 characters ";
+        message.classList.add("text-danger");
+        message.classList.remove("text-success");
+    
+    
+    
+    
+    }
+            
+   
+}
+
+
     else{
 
 message.classList.replace("d-none" , "d-block");
@@ -57,12 +117,14 @@ for (var i =0 ; i < allInputs.length ; i++){
             }
             
     if(regex[allInputs[i].id].test(allInputs[i].value)){
-        console.log("yess")
-
+        allInputs[i].classList.add("is-valid");
+        allInputs[i].classList.remove("is-invalid");
+console.log("valid")
     }
     else{
         console.log("Ni")
-
+        allInputs[i].classList.add("is-invalid");
+        allInputs[i].classList.remove("is-valid");
     }
     
     })
