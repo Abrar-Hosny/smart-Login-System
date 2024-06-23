@@ -16,17 +16,18 @@ form.addEventListener("submit" , function(e){
 
 btn.addEventListener("click" , function(){
    if(email.value != null && name.value!=null && password!=null){
-   
-    if(email.classList.contains("is-valid") && password.classList.contains("is-valid")){
-        message.classList.replace("d-none" , "d-block");
-        message.innerHTML = "success";
-        message.classList.remove("")
+    message.classList.replace("d-none" , "d-block");
+    message.innerHTML = "success";
+    message.classList.remove("text-danger");
+    message.classList.add("text-info");
+    
+    var emailValue = email.value ; 
+    var passwordValue = password.value ; 
+    
+    // if(email.classList.contains("is-valid") && password.classList.contains("is-valid")){
         
-        var emailValue = email.value ; 
-        var passwordValue = password.value ; 
         
-        
-            }
+    //         }
    }
     else{
 message.classList.replace("d-none" , "d-block");
