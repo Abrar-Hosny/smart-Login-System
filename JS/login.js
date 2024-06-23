@@ -22,8 +22,8 @@ if(emailInput.value!="" && passwordInput.value!=""){
         accountsExsist=JSON.parse(localStorage.getItem("accounts"));
         for(var i =0 ; i<accountsExsist.length ; i++){
             if(accountsExsist[i].email == email.value && accountsExsist[i].password == passwordInput.value  ){
-                message.innerHTML = "welcome";
-                localStorage.setItem("User" , JSON.stringify(accountsExsist));
+                console.log(accountsExsist)
+                localStorage.setItem("User" , JSON.stringify(accountsExsist[i]));
                 window.location.href="../homePage.html"; 
                 break;
             }
